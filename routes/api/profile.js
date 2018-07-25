@@ -28,23 +28,38 @@ router.get(
     }
 );
 
+
 router.get('/all', (req, res) => {
     const errors = {};
-  
+
     Profile.find()
-      .populate('user', ['name'])
-      .then(profiles => {
-        if (!profiles) {
-          errors.noprofile = 'There are no profiles';
-          return res.status(404).json(errors);
-        }
-  
-        res.json(profiles);
-      })
-      .catch(err => res.status(404).json({ profile: 'There are no profiles' }));
-  });
+        .populate('user', ['name'])
+        .then(profiles => {
+            if (!profiles) {
+                errors.noprofile = 'There are no profiles';
+                return res.status(404).json(errors);
+            }
 
+            res.json(profiles);
+        })
+        .catch(err => res.status(404).json({ profile: 'There are no profiles' }));
+});
 
+router.get('/handle/:handle', (req, res) => {
+    const errors = {};
+
+    Profile.findOne({ handle: req.params.handle })
+        .populate('user', ['name'])
+        .then(profile => {
+            if (!profile) {
+                errors.noprofile = 'There is no profile for this user';
+                res.status(404).json(errors);
+            }
+
+            res.json(profile);
+        })
+        .catch(err => res.status(404).json(err));
+});
 
 
 module.exports = router;
