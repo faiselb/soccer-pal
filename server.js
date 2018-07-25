@@ -4,6 +4,14 @@ const bodyParser = require('body-parser');
 require('dotenv').config()
 
 const passport = require('passport');
+
+const users = require('./routes/api/users');
+
+const profile = require('./routes/api/profile');
+const updates = require('./routes/api/updates');
+const places = require('./routes/api/places');
+const meetups = require('./routes/api/meetups');
+
 const app = express();
 
 app.use(express.static(__dirname + '/client/build/'))
@@ -23,6 +31,14 @@ mongoose
   .connect(db)
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
+
+
+  app.use('/api/users', users);
+
+  app.use('/api/profile', profile);
+  app.use('/api/updates', updates);
+  app.use('/api/places', places);
+  app.use('/api/meetups', meetups);
 
 const port = process.env.PORT || 5000;
 
