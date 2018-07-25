@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 require('dotenv').config()
 
+const passport = require('passport');
 const app = express();
 
 app.use(express.static(__dirname + '/client/build/'))
@@ -12,6 +13,9 @@ app.get('/', (req, res) => {
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(passport.initialize());
+
+require('./config/passport')(passport);
 
 const db = require('./config/keys').mongoURI;
 
