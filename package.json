@@ -1,0 +1,25 @@
+{
+  "name": "soccer-pal",
+  "version": "1.0.0",
+  "description": "A social network for soccer fans",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faiselb/soccer-pal.git"
+  },
+  "author": "Faisal Burqawi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/faiselb/soccer-pal/issues"
+  },
+  "homepage": "https://github.com/faiselb/soccer-pal#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.5"
+  }
+}
