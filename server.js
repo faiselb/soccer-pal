@@ -16,7 +16,7 @@ const app = express();
 
 app.use(express.static(__dirname + '/client/build/'))
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/client/build/index.html')
+    res.sendFile(__dirname + '/client/build/index.html')
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -28,17 +28,17 @@ require('./config/passport')(passport);
 const db = require('./config/keys').mongoURI;
 
 mongoose
-  .connect(db)
-  .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log(err));
+    .connect(db)
+    .then(() => console.log('MongoDB Connected'))
+    .catch(err => console.log(err));
 
 
-  app.use('/api/users', users);
+app.use('/api/users', users);
 
-  app.use('/api/profile', profile);
-  app.use('/api/updates', updates);
-  app.use('/api/places', places);
-  app.use('/api/meetups', meetups);
+app.use('/api/profile', profile);
+app.use('/api/updates', updates);
+app.use('/api/places', places);
+app.use('/api/meetups', meetups);
 
 const port = process.env.PORT || 5000;
 
