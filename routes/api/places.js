@@ -13,4 +13,18 @@ router.get('/', (req, res) => {
         .catch(err => res.status(404).json({ noplacesfound: 'No places found' }));
 });
 
+router.post(
+    '/',
+    (req, res) => {
+        const savedPlace = new Place({
+            type: req.body.type,
+            website: req.body.website,
+            rating: req.body.rating,
+            img:  req.body.img,
+            name:  req.body.name
+        });
+        savedPlace.save().then(place => res.json(place));
+    }
+);
+
 module.exports = router;
