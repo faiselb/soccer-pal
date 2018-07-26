@@ -29,7 +29,6 @@ router.post(
     (req, res) => {
         const { errors, isValid } = validateUpdateInput(req.body);
 
-
         if (!isValid) {
 
             return res.status(400).json(errors);
@@ -49,24 +48,52 @@ router.delete(
     '/:id',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
-      Profile.findOne({ user: req.user.id }).then(profile => {
-        Update.findById(req.params.id)
-          .then(update => {
-  
-            if (update.user.toString() !== req.user.id) {
-              return res
-                .status(401)
-                .json({ notauthorized: 'User not authorized' });
-            }
-  
-  
-            update.remove().then(() => res.json({ success: true }));
-          })
-          .catch(err => res.status(404).json({ updatenotfound: 'No update found' }));
-      });
-    }
-  );
+        Profile.findOne({ user: req.user.id }).then(profile => {
+            Update.findById(req.params.id)
+                .then(update => {
 
+                    if (update.user.toString() !== req.user.id) {
+                        return res
+                            .status(401)
+                            .json({ notauthorized: 'User not authorized' });
+                    }
+
+
+                    update.remove().then(() => res.json({ success: true }));
+                })
+                .catch(err => res.status(404).json({ updatenotfound: 'No update found' }));
+        });
+    }
+);
+
+router.post(
+    '/comment/:id',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        const { errors, isValid } = validateUpdateInput(req.body);
+
+
+        if (!isValid) {
+
+            return res.status(400).json(errors);
+        }
+
+        Update.findById(req.params.id)
+            .then(update => {
+                const newComment = {
+                    text: req.body.text,
+                    name: req.body.name,
+                    user: req.user.id
+                };
+
+
+                update.comments.unshift(newComment);
+
+                update.save().then(update => res.json(update));
+            })
+            .catch(err => res.status(404).json({ updatenotfound: 'No update found' }));
+    }
+);
 
 
 
