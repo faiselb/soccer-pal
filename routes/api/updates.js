@@ -15,6 +15,14 @@ router.get('/', (req, res) => {
         .catch(err => res.status(404).json({ noupdatesfound: 'No updates found' }));
 });
 
+router.get('/:id', (req, res) => {
+    Update.findById(req.params.id)
+        .then(update => res.json(update))
+        .catch(err =>
+            res.status(404).json({ noupdatefound: 'No update found with that ID' })
+        );
+});
+
 
 
 module.exports = router;
