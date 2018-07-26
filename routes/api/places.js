@@ -27,4 +27,13 @@ router.post(
     }
 );
 
+router.delete(
+    '/:id',
+    (req, res) => {
+        Place.findOneAndRemove({ _id: req.params.id }).then((removedPlace) => {
+            res.json(removedPlace);
+        }).catch(err => res.status(422).json(err));
+    }
+);
+
 module.exports = router;
