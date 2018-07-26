@@ -23,6 +23,28 @@ router.get('/:id', (req, res) => {
         );
 });
 
+router.post(
+    '/',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        const { errors, isValid } = validateUpdateInput(req.body);
+
+
+        if (!isValid) {
+
+            return res.status(400).json(errors);
+        }
+
+        const newUpdate = new Update({
+            text: req.body.text,
+            name: req.body.name,
+            user: req.user.id
+        });
+
+        newUpdate.save().then(update => res.json(update));
+    }
+);
+
 
 
 module.exports = router;
