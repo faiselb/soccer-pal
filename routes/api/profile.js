@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-
 const mongoose = require('mongoose');
 const passport = require('passport');
 
 const validateProfileInput = require('../../validation/profile');
+const validateCreatedmeetupInput = require('../../validation/createdmeetup');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
