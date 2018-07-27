@@ -31,7 +31,6 @@ router.post(
     }
 );
 
-
 const getIdToNameObj = async () => {
     const users = await User.find();
     let idToNameObj = {};
@@ -70,6 +69,38 @@ router.get(
             .catch(err => res.status(404).json(err));
     }
 );
+
+router.get('/handle/:handle', (req, res) => {
+    const errors = {};
+
+    Profile.findOne({ handle: req.params.handle })
+        .then(profile => {
+            if (!profile) {
+                errors.noprofile = 'There is no profile for this user';
+                res.status(404).json(errors);
+            }
+            User.findOne({ _id: profile.user }).then((user) => {
+                Meetup.find({ createdby: profile.user }).then(async (meetups) => {
+                    const idToNameObj = await getIdToNameObj();
+                    const meetupsWithNameInsteadOfId = meetups.map((meetup) => {
+                        return {
+                            ...meetup._doc,
+                            createdby: user.name,
+                            joinedUserNames: meetup._doc.joinedUsers.map((userId) => idToNameObj[userId])
+                        };
+                    });
+                    res.json(meetupsWithNameInsteadOfId);
+                });
+            }
+            )
+        })
+        .catch(err => res.status(404).json(err));
+});
+
+
+
+
+
 
 module.exports = router;
 
