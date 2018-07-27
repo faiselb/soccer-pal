@@ -7,7 +7,29 @@ const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 const validateCreatedmeetupInput = require('../../validation/createdmeetup');
 
+router.post(
+    '/',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        const { errors, isValid } = validateCreatedmeetupInput(req.body);
 
+        if (!isValid) {
+
+            return res.status(400).json(errors);
+        }
+        const meetup = new Meetup({
+            title: req.body.title,
+            createdby: req.user.id,
+            location: req.body.location,
+            date: req.body.date,
+            time: req.body.time,
+            description: req.body.description
+        });
+        meetup.save().then(meetup => {
+            res.json(meetup);
+        }).catch(err => res.status(422).json(err));
+    }
+);
 
 module.exports = router;
 
