@@ -9,6 +9,8 @@ const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const places = require('./routes/api/places');
 
+const updates = require('./routes/api/updates');
+
 const app = express();
 
 app.use(express.static(__dirname + '/client/build/'))
@@ -33,6 +35,8 @@ mongoose
 app.use('/api/users', users);
 app.use('/api/profile', profile);
 app.use('/api/places', places);
+
+app.use('/api/updates', updates);
 
 const port = process.env.PORT || 5000;
 
