@@ -95,7 +95,36 @@ router.post(
     }
 );
 
+router.delete(
+    '/comment/:id/:comment_id',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        Update.findById(req.params.id)
+            .then(update => {
 
+                if (
+                    update.comments.filter(
+                        comment => comment._id.toString() === req.params.comment_id
+                    ).length === 0
+                ) {
+                    return res
+                        .status(404)
+                        .json({ commentnotexists: 'Comment does not exist' });
+                }
+
+
+                const removeIndex = update.comments
+                    .map(item => item._id.toString())
+                    .indexOf(req.params.comment_id);
+
+
+                update.comments.splice(removeIndex, 1);
+
+                update.save().then(update => res.json(update));
+            })
+            .catch(err => res.status(404).json({ updatenotfound: 'No update found' }));
+    }
+);
 
 
 module.exports = router;
