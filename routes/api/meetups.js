@@ -97,6 +97,47 @@ router.get('/handle/:handle', (req, res) => {
         .catch(err => res.status(404).json(err));
 });
 
+router.post(
+    '/:id/join',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        Meetup.findOne({ _id: req.params.id }).then((meetup) => {
+            meetup.joinedUsers.unshift(req.user.id);
+            meetup.save().then(async (meetup) => {
+                const idToNameObj = await getIdToNameObj();
+                const meetupWithNames = {
+                    ...meetup._doc,
+                    createdby: idToNameObj[meetup._doc.createdby],
+                    joinedUserNames: meetup._doc.joinedUsers.map((userId) => idToNameObj[userId])
+                }
+                res.json(meetupWithNames)
+            });
+        }).catch(err => res.status(422).json(err));
+    }
+);
+
+router.post(
+    '/:id/leave',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        Meetup.findOne({ _id: req.params.id }).then((meetup) => {
+            const removeIndex = meetup.joinedUsers
+                .map(item => item.id)
+                .indexOf(req.user.id);
+            meetup.joinedUsers.splice(removeIndex, 1);
+            meetup.save().then(async (meetup) => {
+                const idToNameObj = await getIdToNameObj();
+                const meetupWithNames = {
+                    ...meetup._doc,
+                    createdby: idToNameObj[meetup._doc.createdby],
+                    joinedUserNames: meetup._doc.joinedUsers.map((userId) => idToNameObj[userId])
+                }
+                res.json(meetupWithNames)
+            });
+        }).catch(err => res.status(422).json(err));
+    }
+);
+
 
 
 
