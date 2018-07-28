@@ -138,8 +138,15 @@ router.post(
     }
 );
 
-
-
+router.delete(
+    '/:id',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        Meetup.findOneAndRemove({ _id: req.params.id }).then((removedMeetup) => {
+            res.json(removedMeetup);
+        }).catch(err => res.status(422).json(err));
+    }
+);
 
 
 
