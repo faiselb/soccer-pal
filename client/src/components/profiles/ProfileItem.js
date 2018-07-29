@@ -10,7 +10,7 @@ class ProfileItem extends Component {
     return (
       <div className="card card-body bg-light mb-3">
         <div className="row">
-          <div class="col-sm-3 col-sm offset-1">
+          <div className="col-sm-3 col-sm offset-1">
             <img src={require('./images/avatar.jpg')} alt="" className="rounded" />
           </div>
 
@@ -25,7 +25,7 @@ class ProfileItem extends Component {
           </div>
 
         </div>
-        <div class="col-sm-3 col-sm offset-5">
+        <div className="col-sm-3 col-sm offset-5">
         <Link to={`/profile/${profile.handle}`} className="btn btn-success">
               View Profile
             </Link>

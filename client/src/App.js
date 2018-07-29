@@ -18,6 +18,7 @@ import Login from './components/auth/Login';
 import Myaccount from './components/myaccount/Myaccount';
 import CreateProfile from './components/create-profile/CreateProfile';
 import EditProfile from './components/edit-profile/EditProfile';
+import Profile from './components/profile/Profile';
 import Profiles from './components/profiles/Profiles';
 import NotFound from './components/not-found/NotFound';
 
@@ -55,6 +56,7 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/profiles" component={Profiles} />
+              <Route exact path="/profile/:handle" component={Profile} />
 
               <Switch>
                 <PrivateRoute exact path="/myaccount" component={Myaccount} />
