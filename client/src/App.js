@@ -24,6 +24,8 @@ import Meetups from './components/meetups/Meetups';
 import Profile from './components/profile/Profile';
 import Meetup from './components/meetup/Meetup';
 import NotFound from './components/not-found/NotFound';
+import Places from './components/map/Places';
+import SavedPlaces from './components/map/SavedPlaces';
 
 import './App.css';
 
@@ -65,6 +67,12 @@ class App extends Component {
 
               <Switch>
                 <PrivateRoute exact path="/myaccount" component={Myaccount} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/places" component={Places} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/saved-places" component={SavedPlaces} />
               </Switch>
               <Switch>
                 <PrivateRoute
