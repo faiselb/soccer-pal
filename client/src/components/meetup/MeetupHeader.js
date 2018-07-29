@@ -1,0 +1,27 @@
+import React, { Component } from 'react';
+import isEmpty from '../../validation/is-empty';
+
+class MeetupHeader extends Component {
+  render() {
+    const { profile } = this.props;
+
+    return (
+      <div className="row">
+        <div className="col-sm-10 col-sm offset-1">
+          <div className="card card-body bg-success text-white mb-3">
+            <div className="row">
+           
+            </div>
+            <div className="text-center">
+              <h1 className="display-8 text-center">{profile.user.name}'s Meetups</h1>
+              {isEmpty(profile.location) ? null : <p>{profile.location}</p>}
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default MeetupHeader;

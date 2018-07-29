@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
+import { getCurrentProfile, deleteAccount, getCurrentMeetups } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 import ProfileActions from './ProfileActions';
+import Createdmeetup from './Createdmeetup';
 
 
 class Myaccount extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
+    this.props.getCurrentMeetups();
   }
 
   onDeleteClick(e) {
@@ -35,6 +37,7 @@ class Myaccount extends Component {
       <hr />
 
             <ProfileActions />
+            <Createdmeetup createdmeetup={this.props.meetups} />
             <div style={{ marginBottom: '60px' }} />
             <button
               onClick={this.onDeleteClick.bind(this)}
@@ -83,9 +86,10 @@ Myaccount.propTypes = {
 
 const mapStateToProps = state => ({
   profile: state.profile,
+  meetups: state.profile.meetups,
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount, getCurrentMeetups })(
   Myaccount
 );

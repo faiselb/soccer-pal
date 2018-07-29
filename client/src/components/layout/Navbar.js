@@ -29,6 +29,12 @@ class Navbar extends Component {
             My Account
           </Link>
         </li>
+
+         <li className="nav-item">
+          <Link className="nav-link" to="/meetups">
+            Meetups
+          </Link>
+        </li>
       
         <li className="nav-item">
           <a

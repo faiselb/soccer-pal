@@ -18,8 +18,11 @@ import Login from './components/auth/Login';
 import Myaccount from './components/myaccount/Myaccount';
 import CreateProfile from './components/create-profile/CreateProfile';
 import EditProfile from './components/edit-profile/EditProfile';
-import Profile from './components/profile/Profile';
+import AddCreatedmeetup from './components/add-meetups/AddCreatedmeetup';
 import Profiles from './components/profiles/Profiles';
+import Meetups from './components/meetups/Meetups';
+import Profile from './components/profile/Profile';
+import Meetup from './components/meetup/Meetup';
 import NotFound from './components/not-found/NotFound';
 
 import './App.css';
@@ -56,7 +59,9 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/profiles" component={Profiles} />
+              <Route exact path="/meetups" component={Meetups} />
               <Route exact path="/profile/:handle" component={Profile} />
+              <Route exact path="/meetup/:handle" component={Meetup} />
 
               <Switch>
                 <PrivateRoute exact path="/myaccount" component={Myaccount} />
@@ -73,6 +78,13 @@ class App extends Component {
                   exact
                   path="/edit-profile"
                   component={EditProfile}
+                />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/add-createdmeetup"
+                  component={AddCreatedmeetup}
                 />
               </Switch>
               <Route exact path="/not-found" component={NotFound} />
