@@ -1,15 +1,13 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
-const mongoose = require('mongoose');
-const passport = require('passport');
 const key = require('../../config/keys');
 
 const Place = require('../../models/Place');
 
 router.get('/search', async (req, res) => {
+    console.log(key);
     const APIkey = "&key=" + key.PLACES_KEY;
-    const Geokey = key.GEO_KEY;
     types = ['gym', 'bar', 'park'];
     let searchResults = [];
     await Promise.all(types.map(async (typeVal) => {
