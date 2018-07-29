@@ -24,6 +24,8 @@ import Meetups from './components/meetups/Meetups';
 import Profile from './components/profile/Profile';
 import Meetup from './components/meetup/Meetup';
 import NotFound from './components/not-found/NotFound';
+import Updates from './components/updates/Updates';
+import Update from './components/update/Update';
 import Places from './components/map/Places';
 import SavedPlaces from './components/map/SavedPlaces';
 
@@ -94,6 +96,12 @@ class App extends Component {
                   path="/add-createdmeetup"
                   component={AddCreatedmeetup}
                 />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/updates" component={Updates} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/update/:id" component={Update} />
               </Switch>
               <Route exact path="/not-found" component={NotFound} />
             </div>
