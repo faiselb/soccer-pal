@@ -29,6 +29,13 @@ class MeetupInfo extends Component {
             </span>
           )}
         </p>
+        <p>
+          {cmeetup.time === '' ? null : (
+            <span>
+              <strong>Time: </strong> {cmeetup.time}
+            </span>
+          )}
+        </p>
 
         <div>
           { cmeetup.joinedUserNames.length === 0 ? null : <div>
