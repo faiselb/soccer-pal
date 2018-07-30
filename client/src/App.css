@@ -4,7 +4,7 @@ img {
 
 .landing {
   position: relative;
-  background: url('./img/soccergame.jpg') no-repeat;
+  background: url('./img/liverpool.jpg') no-repeat;
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -385,10 +385,6 @@ img {
       line-height: 1.5em;
       margin: 0;
     }
-
-
-
-
 
   #main {
     margin-left: 30%;

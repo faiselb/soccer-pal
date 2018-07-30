@@ -35,7 +35,6 @@ router.get('/search', async (req, res) => {
         }));
     }));
 
-
     res.json(searchResults);
 });
 
