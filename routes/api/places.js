@@ -6,7 +6,6 @@ const key = require('../../config/keys');
 const Place = require('../../models/Place');
 
 router.get('/search', async (req, res) => {
-    console.log(key);
     const APIkey = "&key=" + key.PLACES_KEY;
     types = ['gym', 'bar', 'park'];
     let searchResults = [];
